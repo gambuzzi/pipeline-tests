@@ -1,6 +1,9 @@
 name: Compiler
 on: 
   push:
+    paths-ignore:
+      - README.md
+      - .github/workflows/pipeline.yml
 jobs:
   buildpipeline:
     runs-on: ubuntu-latest
