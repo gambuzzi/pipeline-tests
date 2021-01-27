@@ -2,8 +2,9 @@ name: Compiler
 on: 
   push:
     paths-ignore:
-      - .github/workflows/pipeline.yaml
-      - .github/workflows/pipeline.yml
+    - '.github/workflows/pipeline**'
+    - '.github/workflows/pipeline.yaml'
+    - '.github/workflows/pipeline.yml'
 jobs:
   buildpipeline:
     runs-on: ubuntu-latest
@@ -13,19 +14,10 @@ jobs:
           token: ${{ secrets.ACTIONS_TOKEN }}
       - name: Build the pipeline yaml file
         run: |
-          echo <<EOF > .github/workflows/pipeline.yaml
-          name: Pipeline
-          on: push
-          jobs:
-            build-pipeline:
-              runs-on: ubuntu-latest
-              steps:
-                - uses: actions/checkout@v2
-          EOF
-          date +%s > pipeline/lastrun.txt
-          echo "" >> pipeline/lastrun.txt
-          date >> pipeline/lastrun.txt
           cd pipeline
+          date +%s > lastrun.txt
+          date >> lastrun.txt
+          cp pipeline.yaml ../.github/workflows/pipeline.yaml
           # make build
       - name: Commit pipeline
         run: |
