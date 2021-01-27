@@ -2,7 +2,7 @@ name: Compiler
 on: 
   push:
     paths-ignore:
-      - README.md
+      - .github/workflows/pipeline.yaml
       - .github/workflows/pipeline.yml
 jobs:
   buildpipeline:
@@ -23,7 +23,7 @@ jobs:
                 - uses: actions/checkout@v2
           EOF
           date +%s > pipeline/lastrun.txt
-          echo "\n" >> pipeline/lastrun.txt
+          echo "" >> pipeline/lastrun.txt
           date >> pipeline/lastrun.txt
           cd pipeline
           # make build
