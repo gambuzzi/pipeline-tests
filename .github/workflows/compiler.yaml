@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACTIONS_TOKEN }}
       - name: Build the pipeline yaml file
         run: |
           echo <<EOF > .github/workflows/pipeline.yaml
