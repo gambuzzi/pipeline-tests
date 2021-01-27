@@ -25,5 +25,5 @@ jobs:
           git config --global user.email 'no-reply@users.noreply.github.com'
           git add -f .github/workflows/pipeline.yaml
           git add pipeline/lastrun.txt
-          git commit -m "Automated pipeline build"
+          git commit -m "Automated pipeline run"
           git push
