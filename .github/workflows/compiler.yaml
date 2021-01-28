@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACTIONS_TOKEN }}
-      - uses: gbinside/ga-compile-pipeline@main
+      - uses: gambuzzi/ga-compile-pipeline@main
         with:
           build: 'make build'
           publish: 'make publish'
