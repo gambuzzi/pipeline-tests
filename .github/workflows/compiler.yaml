@@ -12,13 +12,24 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACTIONS_TOKEN }}
+      - name: Set up tools directory
+        shell: bash
+        working-directory: ${{ github.workspace }}
+        run: |
+          mkdir -p ${{ github.workspace }}/bin
+          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+      - name: Install kustomize
+        shell: bash
+        working-directory: ${{ github.workspace }}/bin
+        run: |
+          curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.8.4/kustomize_v3.8.4_linux_amd64.tar.gz -o kustomize.tar.gz
+          tar -xzf kustomize.tar.gz -C $GITHUB_PATH
       - name: Build the pipeline yaml file
         run: |
           cd pipeline
           date +%s > lastrun.txt
           date >> lastrun.txt
-          cp pipeline.yaml ../.github/workflows/pipeline.yaml
-          # make build
+          make build
       - name: Commit pipeline
         run: |
           git config --global user.name 'Autobot'
