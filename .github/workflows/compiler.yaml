@@ -17,6 +17,7 @@ jobs:
           path: .github/actions/gambuzzi/ga-compile-pipeline
       - uses: ./../.github/actions/gambuzzi/ga-compile-pipeline
         with:
-          build: 'make  build'
-          publish: 'make publish'
+          commands:
+            - 'make build'
+            - 'make publish'
              
