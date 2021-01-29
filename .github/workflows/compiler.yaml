@@ -10,13 +10,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACTIONS_TOKEN }}
-      - uses: actions/checkout@v1
-        working-directory: ${{ github.workspace }}
+      - uses: actions/checkout@v1        
         with:
           repository: gambuzzi/ga-compile-pipeline
           ref: main
           path: .github/actions/gambuzzi/ga-compile-pipeline
-      - uses: gambuzzi/ga-compile-pipeline@main
+      - uses: ../.github/actions/gambuzzi/ga-compile-pipeline
         with:
           build: 'make build'
           publish: 'make publish'
