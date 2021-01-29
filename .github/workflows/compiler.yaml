@@ -11,6 +11,7 @@ jobs:
         with:
           token: ${{ secrets.ACTIONS_TOKEN }}
       - uses: actions/checkout@v1
+        working-directory: ${{ github.workspace }}
         with:
           repository: gambuzzi/ga-compile-pipeline
           ref: main
