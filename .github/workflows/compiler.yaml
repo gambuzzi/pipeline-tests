@@ -15,7 +15,7 @@ jobs:
           repository: gambuzzi/ga-compile-pipeline
           ref: main
           path: .github/actions/gambuzzi/ga-compile-pipeline
-      - uses: ../.github/actions/gambuzzi/ga-compile-pipeline
+      - uses: ./../.github/actions/gambuzzi/ga-compile-pipeline
         with:
           build: 'make build'
           publish: 'make publish'
