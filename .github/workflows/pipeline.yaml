@@ -6,7 +6,7 @@ on:
 env:
   PROGRAM: tests
   REGISTRY: gambuzzi
-  IMG_NAME: pipeline-tests
+  IMG_NAME: pipeline-test
   MAINTAINER: gambuzzi
   OWNER: gambuzzi
 jobs:
@@ -19,7 +19,7 @@ jobs:
         run: >
           echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-          echo "PYMD5=$(find . \( -name '*.py' -o -name '*.sh' \) -exec cat {} + | md5sum)" >> $GITHUB_ENV
+          echo "PYMD5=$(find . \( -name '*.py' -o -name '*.sh' \) -exec cat {} + | md5sum | awk '{print $1}')" >> $GITHUB_ENV
       - name: Env Setup 2
         run: |
           echo "TAG=${{ env.COMMIT }}-${{ env.PYMD5 }}" >> $GITHUB_ENV
@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: |
           docker build -t ${IMG_NAME} .
-      - name: Build
+      - name: Push
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -39,4 +39,4 @@ jobs:
           docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
           docker tag ${IMG_NAME} ${{ env.IMG }}
           docker push ${{ env.IMG }}
-# Sat Jan 30 18:01:25 UTC 2021
+# Sat Jan 30 18:26:57 UTC 2021
