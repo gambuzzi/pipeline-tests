@@ -17,7 +17,9 @@ jobs:
           path: .github/actions/gambuzzi/ga-compile-pipeline
       - uses: ./../.github/actions/gambuzzi/ga-compile-pipeline
         with:
-          commands: |
-            make build
-            make publish
+          program: pipiline_test
+          registry: docker.io/user
+          img_name: pipiline_test
+          maintainer: gambuzzi
+          owner: gambuzzi
              
