@@ -19,7 +19,7 @@ jobs:
         with:
           program: tests
           registry: gambuzzi
-          img_name: pipeline-tests
+          img_name: pipeline-test
           maintainer: gambuzzi
           owner: gambuzzi
              
