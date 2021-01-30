@@ -6,7 +6,7 @@ on:
 env:
   PROGRAM: tests
   REGISTRY: gambuzzi
-  IMG_NAME: pipeline-test
+  IMG_NAME: pipeline-tests
   MAINTAINER: gambuzzi
   OWNER: gambuzzi
 jobs:
@@ -29,7 +29,7 @@ jobs:
           $GITHUB_ENV
       - name: Build
         run: |
-          docker build --target=production -t ${IMG_NAME} .
+          docker build -t ${IMG_NAME} .
       - name: Build
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -39,4 +39,4 @@ jobs:
           docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
           docker tag ${IMG_NAME} ${{ env.IMG }}
           docker push ${{ env.IMG }}
-# Sat Jan 30 17:44:54 UTC 2021
+# Sat Jan 30 18:01:25 UTC 2021
