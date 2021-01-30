@@ -6,7 +6,7 @@ on:
 env:
   PROGRAM: tests
   REGISTRY: gambuzzi
-  IMG_NAME: pipeline-test
+  IMG_NAME: pipeline-tests
   MAINTAINER: gambuzzi
   OWNER: gambuzzi
 jobs:
@@ -34,9 +34,12 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: |
+        run: >
           echo "::add-mask::${DOCKER_PASSWORD}"
-          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+
+          echo $DOCKER_PASSWORD | docker login -u ${DOCKER_USERNAME} --password-stdin
+
           docker tag ${IMG_NAME} ${{ env.IMG }}
+
           docker push ${{ env.IMG }}
-# Sat Jan 30 18:26:57 UTC 2021
+# Sat Jan 30 18:38:15 UTC 2021
